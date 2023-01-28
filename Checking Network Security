@@ -1,0 +1,27 @@
+#!/bin/bash
+
+# Script to check network security
+
+# Check for open ports on the local machine
+echo "Open ports on local machine:"
+netstat -tulnp | grep LISTEN
+
+# Check for established connections
+echo "Established connections:"
+netstat -tn | grep ESTABLISHED
+
+# Check for any suspicious listening ports
+echo "Suspicious listening ports:"
+netstat -tulnp | grep -E ":1[0-9]{3}|:2[0-5][0-5]|:7[0-9]{2}|:2[0-9]{3}"
+
+# Check for any unauthorized listening ports
+echo "Unauthorized listening ports:"
+netstat -tulnp | grep -v -E ":22|:25|:80|:443"
+
+# Check for any blocked IP addresses
+echo "Blocked IP addresses:"
+iptables -L -n | grep DROP
+
+# check for any suspicious processes
+echo "Suspicious process:"
+ps aux | grep -v -E "grep|ps" | grep -E "wget|curl|nc|bash|tftp|ftp"
