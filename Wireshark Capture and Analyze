@@ -1,0 +1,22 @@
+# Start a capture on interface eth0 and save it to a file named "capture.pcap"
+sudo wireshark -i eth0 -w capture.pcap
+
+#Stop the capture by pressing ctrl+c
+
+# Use Wireshark's built-in filter to display only HTTP traffic
+tshark -r capture.pcap -Y "http"
+
+# Use Wireshark's built-in filter to display only traffic to a specific IP address
+tshark -r capture.pcap -Y "ip.addr == 192.168.1.100"
+
+# Use Wireshark's built-in filter to display only traffic from a specific IP address
+tshark -r capture.pcap -Y "ip.src == 192.168.1.100"
+
+# Use Wireshark's built-in filter to display only traffic to and from a specific port
+tshark -r capture.pcap -Y "tcp.port == 80"
+
+# Use Wireshark's built-in filter to display only traffic from a specific MAC address
+tshark -r capture.pcap -Y "eth.src == 00:11:22:33:44:55"
+
+# Use Wireshark's built-in filter to display only traffic to a specific MAC address
+tshark -r capture.pcap -Y "eth.dst == 00:11:22:33:44:55"
