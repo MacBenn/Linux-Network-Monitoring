@@ -1,0 +1,24 @@
+#!/bin/bash
+
+# This script demonstrates IP routing in Linux
+
+# View the routing table
+route -n
+
+# Add a static route
+route add -net 192.168.1.0 netmask 255.255.255.0 gw 192.168.1.1
+
+# Delete a static route
+route del -net 192.168.1.0 netmask 255.255.255.0 gw 192.168.1.1
+
+# View the routing cache
+route -Cn
+
+# Flush the routing cache
+route flush
+
+# View the ARP cache
+arp -n
+
+# Flush the ARP cache
+arp -d
